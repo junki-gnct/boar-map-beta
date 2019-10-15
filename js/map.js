@@ -106,6 +106,7 @@ function initMap(isMainMap, center) {
         streetViewControl: false,
         fullscreenControl: false,
         mapTypeId: "roadmap",
+        gestureHandling: "greedy"
     };
     map = new google.maps.Map(document.getElementById('map'), options);
 
