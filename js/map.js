@@ -181,13 +181,9 @@ function searchFeatures(map) {
     };
 
     function markerEvent(i) {
-        markers[i].addListener('mouseover', function () { // マーカーをクリックしたとき
+        markers[i].addListener('click', function () { // マーカーをクリックしたとき
             infoWins[i].open(map, markers[i]); // 吹き出しの表示
         });
-
-        markers[i].addListener('mouseout', function () {
-            infoWins[i].close();
-        })
     }
 
     fetch('https://pascali.info-mapping.com/webservices/publicservice/JsonService.asmx/GetFeaturesByExtent',
@@ -223,7 +219,7 @@ function searchFeatures(map) {
                         markers[i] = marker;
 
                         infoWins[i] = new google.maps.InfoWindow({ // 吹き出しの追加
-                            content: (point["properties"]["VALUE_STR"] != "") ? point["properties"]["VALUE_STR"] : "(詳細情報なし)"
+                            content: (point["properties"]["VALUE_STR"] != "") ? point["properties"]["VALUE_STR"] + "<br><a href=\"./detail.html?id=" + point["properties"]["ID$"] + "\">詳細を表示する</a>": "(詳細情報なし)"
                         });
                         markerEvent(i);
                     }
